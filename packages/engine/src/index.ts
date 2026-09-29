@@ -1,0 +1,15 @@
+import { GameConfig, type LeagueTier, type Mode, type Priority } from './config.js';
+import { tierForLevel } from './tiers.js';
+export { GameConfig, type LeagueTier, type Mode, type Priority } from './config.js'; export { tiers, tierForLevel } from './tiers.js';
+export type TaskXpInput = { difficulty:number; estimatedMinutes:number; priority:Priority; createdAt:Date; doneAt:Date; dueAt?:Date; apexCompletionsToday:number; priorQualifiedDays:number; shortQuestCompletionsToday:number };
+const clamp=(v:number,min:number,max:number)=>Math.min(Math.max(v,min),max);
+export const taskXp=(i:TaskXpInput)=>{const d=clamp(Math.round(i.difficulty),1,10),t=clamp(i.estimatedMinutes,5,480),base=Math.round(8*d**1.4*(1+Math.log(1+t/30))*GameConfig.task.priority[i.priority]),early=i.dueAt===undefined?1:i.doneAt.getTime()>i.dueAt.getTime()?0.85:1+0.25*Math.max(0,(i.dueAt.getTime()-i.doneAt.getTime())/Math.max(1,i.dueAt.getTime()-i.createdAt.getTime())),apex=d>=8&&i.apexCompletionsToday<3?1.15:1,streak=1+Math.min(.02*i.priorQualifiedDays,.4),eligible=t>=15||i.shortQuestCompletionsToday<5;return {base,multipliers:{early,apex,streak},final:eligible?Math.round(base*early*apex*streak):0,eligible};};
+export const cumulativeXpForLevel=(l:number)=>5700*(Math.exp(.0592*(clamp(Math.floor(l),1,100)-1))-1);
+export const levelForXp=(xp:number)=>clamp(1+Math.floor(Math.log(1+Math.max(0,xp)/5700)/.0592+1e-12),1,100);
+export const xpForNextLevel=(l:number)=>l>=100?0:cumulativeXpForLevel(l+1)-cumulativeXpForLevel(l);
+export const qualifiesDay=(mode:Mode,i:{earnedXp:number;plannedXp:number;completedQuests:number;committedQuests:number;completedCommittedQuests:number})=>mode==='BALANCED'?i.completedQuests>0&&i.earnedXp>=i.plannedXp*.6:i.committedQuests>0&&i.completedCommittedQuests===i.committedQuests;
+export const streakMilestoneBonus=(s:number,l:number)=>[7,30,100,365].includes(s)?.5*xpForNextLevel(l):0;
+export const tierCheckpointFloor=(l:number)=>cumulativeXpForLevel(10*Math.floor((clamp(l,1,100)-1)/10)+1);
+export const streakPenalty=(i:{mode:Mode;currentXp:number;level:number;xpLast7Days:number;streak:number;consecutiveMisses:number})=>{const penalty=i.mode==='HARDCORE'?Math.min(.3*i.xpLast7Days,.5*xpForNextLevel(i.level)):i.consecutiveMisses>=2?.1*i.xpLast7Days:0;return {penalty,xpAfter:Math.max(i.currentXp-penalty,tierCheckpointFloor(i.level)),streakAfter:i.mode==='HARDCORE'?0:Math.floor(i.streak/2)};};
+const order:readonly LeagueTier[]=['OBSIDIAN','PLATINUM','SOVEREIGN','APEX']; export const leagueScore=(xp:number,time:number)=>xp+(1-time/2_000_000_000); export const leagueOutcome=(tier:LeagueTier,rank:number,xp:number)=>({promote:xp>0&&rank<=7&&tier!=='APEX',relegate:rank>23&&tier!=='OBSIDIAN'}); export const adjacentLeagueTier=(tier:LeagueTier,direction:'UP'|'DOWN')=>order[clamp(order.indexOf(tier)+(direction==='UP'?1:-1),0,3)]!;
+export const progress=(xp:number)=>{const level=levelForXp(xp),needed=xpForNextLevel(level),current=cumulativeXpForLevel(level);return {level,tier:tierForLevel(level),ratio:needed===0?1:Math.min(1,Math.max(0,(xp-current)/needed))};};

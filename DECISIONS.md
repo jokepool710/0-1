@@ -8,3 +8,8 @@
 - Docker Compose starts PostgreSQL 16 and Redis 7 locally. Application processes run directly under Turborepo for fast development.
 - pnpm permits install scripts only for `esbuild` and `sharp`, transitive build-time requirements of Vitest/Expo and Next.js respectively. No other dependency lifecycle scripts are approved.
 - pnpm package-manager self-management is disabled in `.npmrc`; the repository pins pnpm through `packageManager` and avoids a duplicate lockfile document that Turborepo cannot parse.
+
+## M1 — Engine
+
+- The engine clamps difficulty and estimated duration to the specified safe ranges before calculating XP; server validation remains responsible for rejecting invalid persisted input.
+- JavaScript `Math.round` produces all four specified golden values exactly: 10, 129, 309, and 682.
