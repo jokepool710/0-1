@@ -13,3 +13,5 @@
 
 - The engine clamps difficulty and estimated duration to the specified safe ranges before calculating XP; server validation remains responsible for rejecting invalid persisted input.
 - JavaScript `Math.round` produces all four specified golden values exactly: 10, 129, 309, and 682.
+- `react-native-web` is required for Expo's M0 static export. Tailwind is installed in the web app and consumes the generated shared preset.
+- Expo's Hermes export uses `unstable_transformImportMeta` because the resolved development toolchain contains `import.meta`; this is a build compatibility transform, not application logic.

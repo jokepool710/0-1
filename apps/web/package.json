@@ -4,5 +4,5 @@
   "private": true,
   "scripts": { "dev": "next dev", "build": "next build", "typecheck": "tsc --noEmit", "lint": "eslint app --max-warnings=0", "test": "vitest run" },
   "dependencies": { "@side-questing/design-tokens": "workspace:*", "next": "16.0.1", "react": "19.2.0", "react-dom": "19.2.0" },
-  "devDependencies": { "@eslint/js": "9.39.1", "@types/node": "24.10.1", "@types/react": "19.2.2", "@types/react-dom": "19.2.2", "eslint": "9.39.1", "typescript": "5.9.3", "vitest": "4.0.8" }
+  "devDependencies": { "@eslint/js": "9.39.1", "@types/node": "24.10.1", "@types/react": "19.2.2", "@types/react-dom": "19.2.2", "eslint": "9.39.1", "tailwindcss": "3.4.17", "typescript": "5.9.3", "vitest": "4.0.8" }
 }

@@ -1,2 +1,2 @@
-export { tokens } from './tokens.js';
-export type { DesignTokens } from './tokens.js';
+export { tokens } from './tokens';
+export type { DesignTokens } from './tokens';

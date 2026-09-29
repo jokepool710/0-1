@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "type": "module",
-  "exports": { ".": "./src/index.ts", "./tailwind": "./generated/tailwind-preset.mjs", "./react-native": "./generated/react-native-theme.ts" },
+  "exports": { ".": "./src/index.ts", "./tailwind": "./generated/tailwind-preset.mjs", "./react-native": "./generated/react-native-theme.ts", "./generated/tokens.css": "./generated/tokens.css" },
   "scripts": {
     "generate": "tsx scripts/generate.ts",
     "build": "pnpm generate",
