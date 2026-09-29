@@ -1,0 +1,21 @@
+{
+  "name": "side-questing",
+  "private": true,
+  "packageManager": "pnpm@12.4.2",
+  "scripts": {
+    "dev": "docker compose -f infra/docker-compose.yml up -d && turbo dev",
+    "build": "turbo build",
+    "typecheck": "turbo typecheck",
+    "lint": "turbo lint",
+    "test": "turbo test",
+    "format:check": "prettier --check .",
+    "tokens:generate": "pnpm --filter @side-questing/design-tokens generate"
+  },
+  "devDependencies": {
+    "@types/node": "24.10.1",
+    "eslint": "9.39.1",
+    "prettier": "3.6.2",
+    "turbo": "2.6.1",
+    "typescript": "5.9.3"
+  }
+}

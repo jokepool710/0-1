@@ -1,0 +1,9 @@
+export const tokens = {
+  color: { bgVoid: '#07080A', surface1: '#0E1013', surface2: '#14171C', surface3: '#1B1F26', borderSubtle: '#232830', textPrimary: '#E8EAED', textSecondary: '#8B93A1', accentIce: '#7DD3FC', accentChampagne: '#D4B978', dangerEmber: '#E5484D', successJade: '#3DD68C', obsidian: '#3B4150', platinum: '#C9CED6', sovereign: '#B8925A' },
+  font: { ui: 'Geist, sans-serif', mono: 'Geist Mono, monospace', tier: 'Instrument Serif, serif' },
+  space: { 1: '4px', 2: '8px', 3: '12px', 4: '16px', 5: '20px', 6: '24px', 8: '32px' },
+  type: { xs: '12px', sm: '14px', base: '16px', lg: '20px', xl: '28px', display: '44px' },
+  motion: { questComplete: '240ms cubic-bezier(.2,.8,.2,1)', checkDraw: '180ms ease-out', xpBar: '600ms ease-out' }
+} as const;
+
+export type DesignTokens = typeof tokens;

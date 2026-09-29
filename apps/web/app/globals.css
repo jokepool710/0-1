@@ -1,0 +1,6 @@
+@import '@side-questing/design-tokens/generated/tokens.css';
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--sq-color-bg-void); color: var(--sq-color-text-primary); font-family: Geist, sans-serif; }
+main { min-height: 100vh; display: grid; place-items: center; padding: 24px; }
+h1 { font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 44px; margin: 0; }
+p { color: var(--sq-color-text-secondary); }

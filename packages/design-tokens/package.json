@@ -1,0 +1,15 @@
+{
+  "name": "@side-questing/design-tokens",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": { ".": "./src/index.ts", "./tailwind": "./generated/tailwind-preset.mjs", "./react-native": "./generated/react-native-theme.ts" },
+  "scripts": {
+    "generate": "tsx scripts/generate.ts",
+    "build": "pnpm generate",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src scripts --max-warnings=0",
+    "test": "vitest run"
+  },
+  "devDependencies": { "@eslint/js": "9.39.1", "tsx": "4.20.6", "typescript": "5.9.3", "vitest": "4.0.8" }
+}

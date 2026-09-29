@@ -1,0 +1,27 @@
+services:
+  postgres:
+    image: postgres:16.10-alpine
+    environment:
+      POSTGRES_DB: sidequesting
+      POSTGRES_USER: sidequesting
+      POSTGRES_PASSWORD: sidequesting
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U sidequesting -d sidequesting"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+  redis:
+    image: redis:7.4-alpine
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+volumes:
+  postgres-data:
