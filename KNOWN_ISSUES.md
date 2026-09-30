@@ -1,5 +1,4 @@
 # Known issues
 
-## Tooling
-
-- pnpm 12.4.2 writes a duplicate YAML document to `pnpm-lock.yaml` in this environment; Turborepo warns while parsing it, although `pnpm typecheck`, `pnpm lint`, and `pnpm test` all pass. Resolve by upgrading pnpm after confirming its lockfile compatibility in CI.
+No known M0 or M1 issues at the verified commit. pnpm 12's multi-document
+lockfile is supported by the pinned Turbo 2.11.5 release.
