@@ -7,7 +7,7 @@
 - The M0 API is deliberately limited to `GET /healthz`; application routes, database access, and authentication begin in their assigned milestones.
 - Docker Compose starts PostgreSQL 16 and Redis 7 locally. Application processes run directly under Turborepo for fast development.
 - pnpm permits install scripts only for `esbuild` and `sharp`, transitive build-time requirements of Vitest/Expo and Next.js respectively. No other dependency lifecycle scripts are approved.
-- pnpm package-manager self-management is disabled in `.npmrc`; the repository pins pnpm through `packageManager` and avoids a duplicate lockfile document that Turborepo cannot parse.
+- pnpm is pinned through `packageManager` and GitHub Actions. Turbo 2.11.5 is used because it supports pnpm 12's package-manager lockfile document.
 
 ## M1 — Engine
 
